@@ -1,5 +1,7 @@
-# hikkaAVStream
-Allows you to bypass discords' limitations on streaming with linux. With hikkaAVStream you can stream one of your monitors if you have dual screen setup, while also streaming audio.
+# hikkaAVStream-GUI
+Allows you to bypass discords' limitations on streaming with linux. With hikkaAVStream you can stream one of your monitors if you have dual screen setup, while also streaming audio. 
+
+Originally made by the users mentioned below. I'm only contributing a GTK GUI to it.
 
 Dependencies:
 -
@@ -16,9 +18,7 @@ Instructions:
 -
 - Install dependencies
 - Clone repo
-- Follow comments in 'havs.sh'
-- Run `chmod +x havs.sh`
-- Run `./havs.sh`
+- Start the python script and hit start
 - Follow prompt
 - Switch discord webcam to dummy device (Must be running)
 - Switch discord microphone to "Input" device monitor. (This could be done using pavucontrol)
@@ -43,12 +43,10 @@ Monitors: 2
 Which monitor: 0
 CTRL + C to stop
 ```
-TODO
--
-- Better way of setting up audio devices
-- Better way of setting up resolution
+
 
 Mentions
 - [Mon2Cam](https://github.com/ShayBox/Mon2Cam) for foundation and video.
 - [pulseaudio-config](https://github.com/toadjaune/pulseaudio-config) for audio.
 - [v4l2loopback](https://github.com/umlaeute/v4l2loopback) for making this work. 
+- [hikkaAVStream](https://github.com/hikkamorii/hikkaAVStream) which I forked from.
