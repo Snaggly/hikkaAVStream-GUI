@@ -7,18 +7,58 @@ from gi.repository import GLib
 
 class GUI:
     def __init__(self):
+        #Building GUI from XML
         gladeFile = "hikkaAVStream-GUI.glade"
         self.builder = gtk.Builder()
         self.builder.add_from_file(gladeFile)
         self.builder.connect_signals(self)
 
-        self.monitors = subprocess.run(['xrandr', '--listactivemonitors'], stdout=subprocess.PIPE).stdout.decode('ascii')
-        self.speakers = subprocess.run(['pacmd', 'list-sinks'], stdout=subprocess.PIPE).stdout.decode('ascii')
-        self.mics = subprocess.run(['pacmd', 'list-sources'], stdout=subprocess.PIPE).stdout.decode('ascii')
+        #Getting Monitor and Speaker data - Reading terminal output
+        monitors = subprocess.run(['xrandr', '--listactivemonitors'], stdout=subprocess.PIPE).stdout.decode('ascii')
+        speakers = subprocess.run(['pacmd', 'list-sinks'], stdout=subprocess.PIPE).stdout.decode('ascii')
+        mics = subprocess.run(['pacmd', 'list-sources'], stdout=subprocess.PIPE).stdout.decode('ascii')
 
-        print(self.monitors)
-        print(self.speakers)
-        print(self.mics)
+        #Getting GUI Objects
+        self.monitorComboBoxItems = self.builder.get_object("monitorStore")
+        self.speakerComboBoxItems = self.builder.get_object("speakerStore")
+        self.microphComboBoxItems = self.builder.get_object("microphStore")
+
+        self.monitorComboBox = self.builder.get_object("MonitorCombBox")
+        self.speakerComboBox = self.builder.get_object("SpeakerCombBox")
+        self.microphComboBox = self.builder.get_object("MicCombBox")
+        
+        #Filling Monitor combobox
+        i = 1
+        while i <= len(monitors.split('\n')) - 2:
+            line = monitors.split('\n')[i].strip()
+            print(line)
+            self.monitorComboBoxItems.append([line])
+            i = i + 1
+
+        #Filling Speaker combobox
+        i = 1
+        while i <= len(speakers.split('\n')) - 1:
+            line = speakers.split('\n')[i].strip()
+            if line.startswith('name:'):
+                line = line.replace("name: <", "").replace(">", "")
+                print(line)
+                self.speakerComboBoxItems.append([line])
+            i = i + 1
+
+        #Filling Microphone combobox
+        i = 1
+        while i <= len(mics.split('\n')) - 1:
+            line = mics.split('\n')[i].strip()
+            if line.startswith('name:'):
+                line = line.replace("name: <", "").replace(">", "")
+                print(line)
+                self.microphComboBoxItems.append([line])
+            i = i + 1
+        
+        #To do: Read from the shell script later which item was chosen....
+        self.monitorComboBox.set_active(0)
+        self.speakerComboBox.set_active(0)
+        self.microphComboBox.set_active(0)
 
         window = self.builder.get_object("Main_Window")
         window.connect("delete-event", gtk.main_quit)

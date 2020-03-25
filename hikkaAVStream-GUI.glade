@@ -2,25 +2,23 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="microphStore">
+    <columns>
+      <!-- column-name 1 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="monitorStore">
     <columns>
       <!-- column-name 1 -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Hello</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">World</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Whats</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Up</col>
-      </row>
-    </data>
+  </object>
+  <object class="GtkListStore" id="speakerStore">
+    <columns>
+      <!-- column-name 1 -->
+      <column type="gchararray"/>
+    </columns>
   </object>
   <object class="GtkImage" id="startimg">
     <property name="visible">True</property>
@@ -81,8 +79,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -118,8 +116,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -156,8 +154,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -185,6 +183,7 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">20</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel">
@@ -194,8 +193,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -203,9 +202,11 @@
               <object class="GtkComboBox" id="MonitorCombBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">baseline</property>
                 <property name="model">monitorStore</property>
                 <property name="active">0</property>
                 <property name="has_frame">False</property>
+                <property name="popup_fixed_width">False</property>
                 <child>
                   <object class="GtkCellRendererText"/>
                   <attributes>
@@ -231,6 +232,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
+            <property name="spacing">20</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkCheckButton" id="HorizontalFlipCheck">
@@ -295,6 +297,7 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">20</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel">
@@ -304,8 +307,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -313,8 +316,9 @@
               <object class="GtkComboBox" id="SpeakerCombBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="model">monitorStore</property>
+                <property name="model">speakerStore</property>
                 <property name="active">1</property>
+                <property name="popup_fixed_width">False</property>
                 <child>
                   <object class="GtkCellRendererText"/>
                   <attributes>
@@ -339,6 +343,7 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">20</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel">
@@ -348,8 +353,8 @@
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -357,8 +362,10 @@
               <object class="GtkComboBox" id="MicCombBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="model">monitorStore</property>
+                <property name="halign">baseline</property>
+                <property name="model">microphStore</property>
                 <property name="active">2</property>
+                <property name="popup_fixed_width">False</property>
                 <child>
                   <object class="GtkCellRendererText"/>
                   <attributes>
