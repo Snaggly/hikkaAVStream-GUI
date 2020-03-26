@@ -31,29 +31,22 @@ class GUI:
         i = 1
         while i <= len(monitors.split('\n')) - 2:
             line = monitors.split('\n')[i].strip()
-            print(line)
             self.monitorComboBoxItems.append([line])
             i = i + 1
 
         #Filling Speaker combobox
-        i = 1
-        while i <= len(speakers.split('\n')) - 1:
-            line = speakers.split('\n')[i].strip()
+        for line in speakers.split('\n'):
+            line = line.strip()
             if line.startswith('name:'):
                 line = line.replace("name: <", "").replace(">", "")
-                print(line)
                 self.speakerComboBoxItems.append([line])
-            i = i + 1
 
         #Filling Microphone combobox
-        i = 1
-        while i <= len(mics.split('\n')) - 1:
-            line = mics.split('\n')[i].strip()
+        for line in mics.split('\n'):
+            line = line.strip()
             if line.startswith('name:'):
                 line = line.replace("name: <", "").replace(">", "")
-                print(line)
                 self.microphComboBoxItems.append([line])
-            i = i + 1
         
         #To do: Read from the shell script later which item was chosen....
         self.monitorComboBox.set_active(0)

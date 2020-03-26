@@ -28,6 +28,8 @@
   <object class="GtkWindow" id="Main_Window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">hikkaAVStream-GUI</property>
+    <property name="default_width">180</property>
+    <property name="default_height">260</property>
     <property name="icon_name">application-x-executable</property>
     <child type="titlebar">
       <placeholder/>
@@ -42,17 +44,6 @@
         <property name="margin_bottom">10</property>
         <property name="orientation">vertical</property>
         <property name="spacing">5</property>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
@@ -92,7 +83,7 @@
               </object>
               <packing>
                 <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -130,7 +121,7 @@
               </object>
               <packing>
                 <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -168,7 +159,7 @@
               </object>
               <packing>
                 <property name="expand">True</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -183,18 +174,19 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
             <property name="spacing">20</property>
-            <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="label" translatable="yes">Monitor:</property>
                 <property name="justify">right</property>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">False</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -202,7 +194,6 @@
               <object class="GtkComboBox" id="MonitorCombBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">baseline</property>
                 <property name="model">monitorStore</property>
                 <property name="active">0</property>
                 <property name="has_frame">False</property>
@@ -294,22 +285,21 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">20</property>
-            <property name="homogeneous">True</property>
+            <property name="column_spacing">20</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="label" translatable="yes">Speaker:</property>
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
             <child>
@@ -327,42 +317,27 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">9</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">20</property>
-            <property name="homogeneous">True</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="halign">center</property>
                 <property name="label" translatable="yes">Microphone:</property>
                 <property name="justify">right</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkComboBox" id="MicCombBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">baseline</property>
                 <property name="model">microphStore</property>
                 <property name="active">2</property>
                 <property name="popup_fixed_width">False</property>
@@ -374,11 +349,21 @@
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
               </packing>
             </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -393,23 +378,13 @@
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="halign">end</property>
+            <property name="active">True</property>
             <property name="draw_indicator">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">11</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">12</property>
           </packing>
         </child>
         <child>
@@ -425,7 +400,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">13</property>
+            <property name="position">12</property>
           </packing>
         </child>
       </object>
