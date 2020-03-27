@@ -388,7 +388,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="ServiceRunnerButton">
             <property name="label" translatable="yes">Start Service</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -396,6 +396,7 @@
             <property name="halign">center</property>
             <property name="image">startimg</property>
             <property name="always_show_image">True</property>
+            <signal name="clicked" handler="buttonEvent" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
