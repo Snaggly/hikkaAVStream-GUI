@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
-import gi, subprocess
+#My apologies for terrible coding, this is my very first python script.
+#There is yet much to learn and adapt!
+
+import gi, subprocess, os, fileinput, sys
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk as gtk
 from gi.repository import GLib
-from getpass import getpass
 
 class ErrorGUI(gtk.Window):
     def __init__(self, text):
@@ -14,7 +16,6 @@ class ErrorGUI(gtk.Window):
         dialog.run()
         dialog.destroy()
         exit(0)
-        
 
 class GUI:
     def __init__(self):
@@ -79,10 +80,52 @@ class GUI:
             self.isRunning = True
             self.starterButton.set_label("Stop Service")
             self.starterButton.set_image(self.stopimg)
+
+            #Collect data from GUI
+            device = self.builder.get_object('DevEntry').get_text()
+            fps = self.builder.get_object('FPSEntry').get_text()
+            res = self.builder.get_object('ResEntry').get_text()
+            monitor = self.builder.get_object('MonitorCombBox').get_active()
+
+            speakerIter = self.builder.get_object('SpeakerCombBox').get_active_iter()
+            speaker = self.speakerComboBoxItems[speakerIter][0]
+
+            micIter = self.builder.get_object('MicCombBox').get_active_iter()
+            microphone = self.microphComboBoxItems[micIter][0]
+
+            horizonal = self.builder.get_object('HorizontalFlipCheck').get_active()
+            vertical = self.builder.get_object('VerticallFlipCheck').get_active()
+            incldSnd = self.builder.get_object('SoundCheck').get_active()
+            
+            flip = ''
+            if vertical:
+                flip = flip + ' -vf'
+            if horizonal:
+                flip = flip + ' -hf'
+
+            #Search and replace from shell script:
+            for line in fileinput.input("havs.sh", inplace=1):
+                if line.startswith('RESOLUTION='):
+                    line = 'RESOLUTION=\"' + res + '\"\n'
+                if line.startswith('MICROPHONE='):
+                    line = 'MICROPHONE=\"' + microphone + '\"\n'
+                if line.startswith('SPEAKERS='):
+                    line = 'SPEAKERS=\"' + speaker + '\"\n'
+                if not incldSnd and (line.startswith('pactl') or line.startswith('pacmd')):
+                    line = '#' + line
+                elif  incldSnd and (line.startswith('#pactl') or line.startswith('#pacmd')):
+                    line = line[1:]
+                sys.stdout.write(line)
+            
+            #Start shell script:
+            self.havs = subprocess.Popen(['./havs.sh','-f',fps,'-d',device,'-m',str(monitor),flip])
         else:
+            #Stop shell script
+            self.havs.terminate()
             self.isRunning = False
             self.starterButton.set_label("Start Service")
             self.starterButton.set_image(self.startimg)
+
 
 def dependcenyCheck(binary):
     whereis = subprocess.run(['whereis', binary], stdout=subprocess.PIPE).stdout.decode('ascii')
@@ -95,7 +138,6 @@ if not dependcenyCheck('xrandr'):
 if not dependcenyCheck('ffmpeg'):
     main = ErrorGUI("ffmpeg")
     gtk.main()
-
 
 if __name__ == '__main__':
     main = GUI()
