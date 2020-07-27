@@ -28,9 +28,9 @@ class GUI:
         self.isRunning = False
 
         #Getting Monitor and Speaker data - Reading terminal output
-        monitors = subprocess.run(['xrandr', '--listactivemonitors'], stdout=subprocess.PIPE).stdout.decode('ascii')
-        speakers = subprocess.run(['pacmd', 'list-sinks'], stdout=subprocess.PIPE).stdout.decode('ascii')
-        mics = subprocess.run(['pacmd', 'list-sources'], stdout=subprocess.PIPE).stdout.decode('ascii')
+        monitors = subprocess.run(['xrandr', '--listactivemonitors'], stdout=subprocess.PIPE).stdout.decode('utf')
+        speakers = subprocess.run(['pacmd', 'list-sinks'], stdout=subprocess.PIPE).stdout.decode('utf')
+        mics = subprocess.run(['pacmd', 'list-sources'], stdout=subprocess.PIPE).stdout.decode('utf')
 
         #Getting GUI Objects
         self.monitorComboBoxItems = self.builder.get_object("monitorStore")
@@ -128,7 +128,7 @@ class GUI:
 
 
 def dependcenyCheck(binary):
-    whereis = subprocess.run(['whereis', binary], stdout=subprocess.PIPE).stdout.decode('ascii')
+    whereis = subprocess.run(['whereis', binary], stdout=subprocess.PIPE).stdout.decode('utf')
     return whereis!=binary+':\n'
 
 if not dependcenyCheck('xrandr'):
